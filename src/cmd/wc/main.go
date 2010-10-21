@@ -41,7 +41,13 @@ func main() {
     }
     defer fd.Close()
     var ccount, wcount, lcount int64
-    ccount, wcount, lcount, err = Count(fd)
+    ch := make(chan int64)
+    che:=make(chan os.Error)
+    go Count(fd, ch, che)
+    ccount=<-ch
+    wcount=<-ch
+    lcount=<-ch
+    err = <-che
     if *l {
         fmt.Printf("\t%d", lcount)
     }

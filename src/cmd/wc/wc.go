@@ -5,7 +5,8 @@ import (
   "bufio"
 )
 
-func Count(f *os.File)(ccount, wcount, lcount int64, err os.Error) {
+func Count(f *os.File, ch chan int64, che chan os.Error) {
+    var wcount, ccount, lcount int64
     //BUG: initializing wcount to 1 because first word isn't counted otherwise
     wcount, ccount, lcount = 1, 0, 0
     buf := bufio.NewReader(f)
@@ -34,5 +35,8 @@ func Count(f *os.File)(ccount, wcount, lcount int64, err os.Error) {
                 ccount++
         }
     }
-    return
+    ch<-ccount
+    ch<- wcount
+    ch<- lcount
+    che<- err
 }

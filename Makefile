@@ -21,7 +21,7 @@ nuke.dirs: $(addsuffix .nuke, $(DIRS))
 %.nuke:
 	+cd $* && gomake nuke
 %.all:
-	mkdir $(GOBIN)
+	test -d $(gobin) || mkdir $(GOBIN)
 	+cd $* && gomake all
 
 clean: clean.dirs
