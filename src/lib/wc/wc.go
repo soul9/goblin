@@ -1,15 +1,16 @@
-package main
+package wc
 
 import (
   "os"
   "bufio"
 )
 
-func Count(f *os.File, ch chan int64, che chan os.Error) {
+func WC(f *os.File, ch chan <-int64, che chan <-os.Error) {
     var wcount, ccount, lcount int64
     //BUG: initializing wcount to 1 because first word isn't counted otherwise
     wcount, ccount, lcount = 1, 0, 0
     buf := bufio.NewReader(f)
+    var err os.Error
     for c, _, err := buf.ReadRune(); err == nil; c, _, err = buf.ReadRune() {
         switch c {
             case '\t':
@@ -35,8 +36,8 @@ func Count(f *os.File, ch chan int64, che chan os.Error) {
                 ccount++
         }
     }
-    ch<-ccount
-    ch<- wcount
-    ch<- lcount
     che<- err
+    ch<- lcount
+    ch<- wcount
+    ch<-ccount
 }

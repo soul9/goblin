@@ -4,6 +4,7 @@ import (
     "os"
     "fmt"
     "flag"
+    "wc"
 )
 
 func usage() {
@@ -40,22 +41,27 @@ func main() {
         os.Exit(1)
     }
     defer fd.Close()
-    var ccount, wcount, lcount int64
     ch := make(chan int64)
     che:=make(chan os.Error)
-    go Count(fd, ch, che)
-    ccount=<-ch
-    wcount=<-ch
-    lcount=<-ch
+    go wc.WC(fd, ch, che)
     err = <-che
+    if err != nil {
+        fmt.Fprint(os.Stderr, "Error occured: "+err.String())
+    }
     if *l {
-        fmt.Printf("\t%d", lcount)
+        fmt.Printf("\t%d", <-ch)
+    } else {
+        _ = <-ch
     }
     if *w {
-        fmt.Printf("\t%d", wcount)
+        fmt.Printf("\t%d", <-ch)
+    } else {
+        _ = <-ch
     }
     if *c {
-        fmt.Printf("\t%d", ccount)
+        fmt.Printf("\t%d", <-ch)
+    } else {
+        _ = <-ch
     }
     fmt.Printf("\t%s\n", fname)
     os.Exit(0)

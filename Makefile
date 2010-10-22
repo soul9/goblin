@@ -4,7 +4,8 @@ include $(GOROOT)/src/Make.cmd
 GOBIN=$(PWD)/bin
 
 DIRS=\
-	src/cmd/wc
+	src/lib/wc\
+	src/cmd/wc\
 
 
 all.dirs: $(addsuffix .all, $(DIRS))
@@ -16,12 +17,14 @@ nuke.dirs: $(addsuffix .nuke, $(DIRS))
 	+cd $* && gomake clean
 
 %.install:
+	test -d $(GOBIN) || mkdir $(GOBIN)
 	+cd $* && gomake install
+
+CLEANFILES+=/home/johnny/dev/golang/pkg/linux_386/wc.a
 
 %.nuke:
 	+cd $* && gomake nuke
 %.all:
-	test -d $(gobin) || mkdir $(GOBIN)
 	+cd $* && gomake all
 
 clean: clean.dirs
