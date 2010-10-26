@@ -6,6 +6,8 @@ GOBIN=$(PWD)/bin
 DIRS=\
 	src/lib/wc\
 	src/cmd/wc\
+	src/lib/cat\
+	src/cmd/cat
 
 
 all.dirs: $(addsuffix .all, $(DIRS))
