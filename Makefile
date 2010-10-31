@@ -1,5 +1,4 @@
 include $(GOROOT)/src/Make.inc
-include $(GOROOT)/src/Make.cmd
 
 GOBIN=$(PWD)/bin
 
@@ -20,8 +19,6 @@ nuke.dirs: $(addsuffix .nuke, $(DIRS))
 %.install:
 	test -d $(GOBIN) || mkdir $(GOBIN)
 	+cd $* && gomake install
-
-CLEANFILES+=/home/johnny/dev/golang/pkg/linux_386/wc.a
 
 %.nuke:
 	+cd $* && gomake nuke
