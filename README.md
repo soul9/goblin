@@ -6,5 +6,5 @@ The reason i started working on this is that I needed a few of the unix tools, p
 
 Current problems:
 
-* wc doesn't count as many characters as the GNU (or plan9) wc for now, i'm not sure why, maybe because I use ReadRune instead of ReadByte
+* wc doesn't count as many characters as the GNU (or plan9) wc in binary files for now, i'm not sure why, maybe because I use ReadRune instead of ReadByte
 * cat is way slow, probably because it uses channels to communicate
