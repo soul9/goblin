@@ -4,7 +4,7 @@ import (
     "os"
     "flag"
     "fmt"
-    "cat"
+    "goblin"
 )
 
 func usage() {
@@ -37,7 +37,7 @@ func main(){
                 os.Exit(1)
             }
         }
-        go cat.Cat(fd, bch, errch)
+        go goblin.Cat(fd, bch, errch)
         for err = <- errch; err == nil; err = <-errch {
             fmt.Printf("%s", <- bch)
         }

@@ -4,7 +4,7 @@ import (
     "os"
     "fmt"
     "flag"
-    "wc"
+    "goblin"
 )
 
 func usage() {
@@ -43,7 +43,7 @@ func main() {
     defer fd.Close()
     ch := make(chan int64)
     che:=make(chan os.Error)
-    go wc.WC(fd, ch, che)
+    go goblin.WC(fd, ch, che)
     err = <-che
     if err != nil {
         fmt.Fprint(os.Stderr, "Error occured: "+err.String())

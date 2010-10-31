@@ -1,4 +1,4 @@
-package cat
+package goblin
 import (
     "os"
     "bufio"

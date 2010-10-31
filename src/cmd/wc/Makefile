@@ -1,6 +1,6 @@
 include $(GOROOT)/src/Make.inc
 TARG=wc
 GOFILES=\
-    main.go\
+    wc.go\
 
 include $(QUOTED_GOROOT)/src/Make.cmd

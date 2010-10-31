@@ -1,4 +1,4 @@
-package wc
+package goblin
 
 import (
   "os"

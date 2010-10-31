@@ -4,10 +4,9 @@ include $(GOROOT)/src/Make.cmd
 GOBIN=$(PWD)/bin
 
 DIRS=\
-	src/lib/wc\
+	src/lib\
+	src/cmd/cat\
 	src/cmd/wc\
-	src/lib/cat\
-	src/cmd/cat
 
 
 all.dirs: $(addsuffix .all, $(DIRS))
